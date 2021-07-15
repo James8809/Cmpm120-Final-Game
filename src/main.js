@@ -16,7 +16,7 @@
 // oh also we added a kind of funny feature so try to find it if you can haha
 let config = {
     type: Phaser.CANVAS,
-    width: 1050,
+    width: 800,
     height: 600,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -24,14 +24,14 @@ let config = {
     physics: {
         default: 'arcade'
     },
-    scene: [Menu, Help, Play, Ending]
+    scene: [Play, Ending]
 }
 
 let game = new Phaser.Game(config);
 
 let w = game.config.width;
 let h = game.config.height;
-let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF;
+let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT;
 let wDivide = w/7;
 let hDivide = h/5;
 let borderUISize = w / 10;
@@ -43,4 +43,6 @@ let truckMargin = (hDivide - truckHeight)/2;
 let count = 0;
 let musicConfig;
 let music;
+let player;
+let cursors;
 // trying out branch
