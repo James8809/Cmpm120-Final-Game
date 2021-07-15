@@ -14,6 +14,8 @@ class Scene1 extends Phaser.Scene{
         this.load.image('floor', './assets/floor.png');
         this.load.image('teddy', './assets/teddy.png');
         this.load.image('door', './assets/door.png');
+        this.load.audio('bgm1', './assets/bgm1.mp3');
+        this.load.audio('bgm2', './assets/bgm2.mp3');
     }
 
     create() {
@@ -67,6 +69,12 @@ class Scene1 extends Phaser.Scene{
 
         this.physics.add.collider(this.player, this.floor);
         this.player.setCollideWorldBounds(true);
+        if(!musicOn) {
+            music = this.sound.add('bgm2');
+            music.setLoop(true);
+            music.play();
+            musicOn = true;
+        }
     }
     update() {
         if(!this.gameOver) {
