@@ -24,10 +24,10 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300}
+            gravity: { y: 1000}
         }
     },
-    scene: [Play, Ending]
+    scene: [Scene1, Ending]
 }
 
 let game = new Phaser.Game(config);

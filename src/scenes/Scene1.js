@@ -1,14 +1,15 @@
-class Play extends Phaser.Scene{
+class Scene1 extends Phaser.Scene{
     constructor() {
-        super("playScene")
+        super("scene1")
     }
 
     init() {
 
     }
     preload() {
-        this.load.image('scene1', './assets/background.png');
-        this.load.image('scene2', './assets/background_2.png');
+        this.load.image('scene1_bg', './assets/background.png');
+        this.load.image('scene2_bg', './assets/background_2.png');
+        this.load.image('floor', './assets/floor.png');
         this.load.image('teddy', './assets/teddy.png');
     }
 
@@ -20,7 +21,10 @@ class Play extends Phaser.Scene{
         this.h = this.cameras.main.height;
 
         
-        this.bg1 = this.add.image(0, 0, 'scene1').setOrigin(0, 0);
+        this.bg1 = this.add.image(0, 0, 'scene1_bg').setOrigin(0, 0);
+        this.floor = this.physics.add.image(0, 1312, 'floor').setOrigin(0, 1);
+        
+        this.floor.setCollideWorldBounds(true);
         this.cameras.main.setBounds(0, 0, this.bg1.displayWidth, this.bg1.displayHeight);
 
         this.player = new Teddy(this,0,0,'teddy').setOrigin(0,0);
@@ -35,7 +39,8 @@ class Play extends Phaser.Scene{
         this.gameOver = false;
         var spawn = true;
         //this.physics.add.overlap(this.p1Police,this.truckGroup,this.crash,null,this);
-        
+
+        this.physics.add.collider(this.player, this.floor);
         this.player.setCollideWorldBounds(true);
         console.log("hi");
     }
