@@ -22,7 +22,10 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     physics: {
-        default: 'arcade'
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300}
+        }
     },
     scene: [Play, Ending]
 }
@@ -31,7 +34,7 @@ let game = new Phaser.Game(config);
 
 let w = game.config.width;
 let h = game.config.height;
-let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT;
+let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT, keySPACE;
 let wDivide = w/7;
 let hDivide = h/5;
 let borderUISize = w / 10;
