@@ -16,6 +16,10 @@ class Scene1 extends Phaser.Scene{
         this.load.image('door', './assets/door.png');
         this.load.audio('bgm1', './assets/bgm1.mp3');
         this.load.audio('bgm2', './assets/bgm2.mp3');
+        this.load.image('tableFeet', './assets/feet.png');
+        this.load.image('tablePlat', './assets/tablePlat.png');
+        this.load.image('shelfPlat', './assets/wall_shelf_plat.png');
+        this.load.image('shelf', './assets/wall_shelf.png');
     }
 
     create() {
@@ -25,17 +29,28 @@ class Scene1 extends Phaser.Scene{
         h = this.bg1.height;
         this.physics.world.setBounds(0, 0, w, h);
 
-        let platforms = this.physics.add.staticGroup();
+        //let platforms = this.physics.add.staticGroup();
         
         this.floor = this.physics.add.image(0, 1312, 'floor').setOrigin(0, 1);
-        
-        this.floor2 = this.physics.add.image(0, 500, 'floor').setOrigin(0, 1).setScale(0.1);
-        this.floor2.setImmovable(true);
-        this.floor2.body.allowGravity = false;
 
         this.floor.setCollideWorldBounds(true);
 
-        
+        this.table1 = this.add.image(w/2, h -this.floor.height,'tableFeet')
+            .setOrigin(0.5,1).setScale(1.5);
+        this.plat1 = this.physics.add.image(this.table1.x,this.table1.y - this.table1.height*1.5,'tablePlat')
+            .setOrigin(0.5,0).setScale(1.5);
+        this.plat1.setImmovable(true);
+        this.plat1.body.allowGravity = false;
+        this.physics.add.collider(this.plat1, this.floor);
+
+        this.shelf1 = this.add.image(500, 700,'shelf')
+            .setOrigin(0,0);
+        this.shelfPlat1 = this.physics.add.image(500, 700,'shelfPlat')
+            .setOrigin(0,0);
+        this.shelfPlat1.setImmovable(true);
+        this.shelfPlat1.body.allowGravity = false;
+        this.physics.add.collider(this.shelfPlat1, this.floor);
+
         this.door1 = this.physics.add.image(0 + borderPadding, h-this.floor.height,'door')
             .setOrigin(0,1).setScale(0.3);
         this.door2 = this.physics.add.image(w - borderPadding, h-this.floor.height,'door')
@@ -68,11 +83,13 @@ class Scene1 extends Phaser.Scene{
         this.physics.add.overlap(this.player,this.door2,this.openRight,null,this);
 
         this.physics.add.collider(this.player, this.floor);
+        this.physics.add.collider(this.player, this.plat1);
+        this.physics.add.collider(this.player, this.shelfPlat1);
         this.player.setCollideWorldBounds(true);
         if(!musicOn) {
             music = this.sound.add('bgm2');
             music.setLoop(true);
-            music.play();
+            //music.play();
             musicOn = true;
         }
     }
