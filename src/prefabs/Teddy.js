@@ -5,6 +5,7 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.moveSpeed = 400;
+        this.jumping = false;
     }
 
     update() {
@@ -15,8 +16,13 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
         if(keyRIGHT.isDown) {
             this.setVelocityX(this.moveSpeed);
         }
+        if(Phaser.Input.Keyboard.JustDown(keySPACE) && this.jumping){
+            this.setVelocityY(-600);
+            this.jumping = false;
+        }
         if(keySPACE.isDown && this.body.touching.down){
             this.setVelocityY(-600);
+            this.jumping = true;
         }
     }
 }
