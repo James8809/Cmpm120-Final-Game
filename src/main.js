@@ -27,7 +27,7 @@ let config = {
             gravity: { y: 1000}
         }
     },
-    scene: [Scene1, Ending]
+    scene: [Scene1, Scene2, Scene3, Scene4]
 }
 
 let game = new Phaser.Game(config);
@@ -48,4 +48,6 @@ let musicConfig;
 let music;
 let player;
 let cursors;
+let leftDoor = false;
+let rightDoor = false;
 // trying out branch
