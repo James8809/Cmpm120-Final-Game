@@ -89,7 +89,7 @@ class Scene1 extends Phaser.Scene{
         if(!musicOn) {
             music = this.sound.add('bgm2');
             music.setLoop(true);
-            //music.play();
+            music.play();
             musicOn = true;
         }
     }
