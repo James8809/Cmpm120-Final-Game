@@ -4,21 +4,19 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.moveSpeed = 10;
+        this.moveSpeed = 400;
     }
 
     update() {
-        if(keyUP.isDown && this.y >= 0 + this.moveSpeed) {
-            this.y -= this.moveSpeed;
+        this.setVelocityX(0);
+        if(keyLEFT.isDown) {
+            this.setVelocityX(-this.moveSpeed);
         }
-        if(keyDOWN.isDown && this.y + 65 <= 1312 - this.moveSpeed) {
-            this.y += this.moveSpeed;
+        if(keyRIGHT.isDown) {
+            this.setVelocityX(this.moveSpeed);
         }
-        if(keyLEFT.isDown && this.x >= 0 + this.moveSpeed) {
-            this.x -= this.moveSpeed;
-        }
-        if(keyRIGHT.isDown && this.x + 39 <= 1575 - this.moveSpeed) {
-            this.x += this.moveSpeed;
+        if(keySPACE.isDown && this.body.touching.down){
+            this.setVelocityY(-200);
         }
     }
 }
