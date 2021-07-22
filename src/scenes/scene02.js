@@ -1,4 +1,4 @@
-class scene02 extends Phaser.Scene{
+class Scene02 extends Phaser.Scene{
     constructor() {
         super("scene02");
     }
@@ -61,8 +61,8 @@ class scene02 extends Phaser.Scene{
       _createCloseModalButton(){
         var self = this;
         this.closeBtn = this.make.text({
-          x: this.getGameWidth() - this.padding - 14,
-          y: this.getGameHeight() - this.windowHeight - this.padding + 3,
+          x: 800 - this.padding - 14,
+          y: 600 - this.windowHeight - this.padding + 3,
           text: 'X',
           style: {
             font: 'bold 12px Arial',
@@ -81,8 +81,8 @@ class scene02 extends Phaser.Scene{
         });
       }
       _createCloseModalButtonBorder() {
-        var x = this.getGameWidth() - this.padding - 20;
-        var y = this.getGameHeight() - this.windowHeight - this.padding;
+        var x = 800 - this.padding - 20;
+        var y = 600 - this.windowHeight - this.padding;
         this.graphics.strokeRect(x, y, 20, 20);
       }
       toggleWindow() {
@@ -99,30 +99,34 @@ class scene02 extends Phaser.Scene{
         // Reset the dialog
         if (this.text) this.text.destroy();
         var x = this.padding + 10;
-        var y = this.getGameHeight() - this.windowHeight - this.padding + 10;
+        var y = 600 - this.windowHeight - this.padding + 10;
         this.text = this.make.text({
           x,
           y,
           text,
           style: {
-            wordWrap: { width: this.getGameWidth() - (this.padding * 2) - 25 }
+            wordWrap: { width: 800 - (this.padding * 2) - 25 }
           }
         });
       }
       createWindow(){
-        var gameHeight = this.getGameHeight();
-        var gameWidth = this.getGameWidth();
+        var gameHeight = 600;
+        var gameWidth = 800;
+        this.add.sprite(0, 0, 'scene1_bg11').setOrigin(0,0);
         var dimensions = this.calculateWindowDimensions(gameWidth, gameHeight);
         this.graphics = this.add.graphics();
         this.createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
         this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
         this._createCloseModalButton();
         this._createCloseModalButtonBorder();
+        this.add.sprite();
         this.setText(" In this area, it looks like you are surrounded by memories of your owner’s everyday life . Like before, try to avoid the memory bubbles or your best friend may not remember the taste of his favorite homemaking food. (Press F to continue) ");
+        keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
       }
       update() {
-        if (Phaser.Input.Keyboard.JustDown(keyF)) {
-          this.scene.start("scene2");
+        if (keyENTER.isDown) {
+          console.log("hello");
+          this.scene.start('scene2');
         }
       }
     }

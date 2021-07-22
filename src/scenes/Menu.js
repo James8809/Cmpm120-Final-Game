@@ -7,18 +7,19 @@ class Menu extends Phaser.Scene{
 
     }
     preload() {
-        this.load.image('menu','./assets/memory_dive.png');
+        this.load.image('scene1_bg1', './assets/title.png');
+        this.load.image('scene1_bg11', './assets/kid_studying.png');
+        this.load.image('scene2_bg22', './assets/kid_sleep.png');
+        this.load.image('scene3_bg33', './assets/kid_end.png');
     }
     create() {
+        this.add.image(0, 0, 'scene1_bg1').setOrigin(0, 0);
         
-        this.add.image(0, 0, 'menu').setOrigin(0, 0);
-        
-        keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         
     }
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+        if (keyENTER.isDown) {
             this.scene.start('scene0');
         }
     }

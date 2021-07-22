@@ -12,11 +12,11 @@ let config = {
             gravity: { y: 1000}
         }
     },
-    scene: [Scene1, Scene2, Scene3]
+    scene: [Menu, Scene0, Scene01, Scene1, Scene02, Scene2, Scene03, Scene3]
 }
 
 let game = new Phaser.Game(config);
-
+console.log("new");
 let w = game.config.width;
 let h = game.config.height;
 let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT, keySPACE;
@@ -28,7 +28,4 @@ let count = 0;
 let musicConfig;
 let music;
 let player;
-let cursors;
-let leftDoor = false;
-let rightDoor = false;
 let musicOn = false;
