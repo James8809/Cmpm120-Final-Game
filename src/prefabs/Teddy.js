@@ -24,5 +24,8 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(-600);
             this.jumping = true;
         }
+        if(keyUP.isDown){
+            this.setVelocityY(-600);
+        }
     }
 }
