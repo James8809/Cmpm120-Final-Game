@@ -7,6 +7,8 @@ class Scene3 extends Phaser.Scene{
 
     }
     preload() {
+        this.load.image('scene4_bg', './assets/ocean_scene4.png');
+        this.load.image('obj3', './assets/hold_bubble.png');
     }
     create() {
         this.bg1 = this.add.image(0, 0, 'scene4_bg').setOrigin(0, 0);
@@ -15,10 +17,10 @@ class Scene3 extends Phaser.Scene{
         h = this.bg1.height;
         this.physics.world.setBounds(0, 0, w, h);
 
-        this.door = this.addPlat(w/2,h,"door")
+        this.door = this.addPlat(w/2,h,"obj3")
             .setOrigin(1,1).setScale(0.3);
 
-        this.player = new Teddy(this, w/2, 0,'teddy').setOrigin(0,1);
+        this.player = new Teddy(this, w/2, 0,'player').setOrigin(0,1);
         this.cameras.main.startFollow(this.player);
 
 
