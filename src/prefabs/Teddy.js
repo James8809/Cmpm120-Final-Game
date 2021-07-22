@@ -14,7 +14,7 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
         } else if(keyRIGHT.isDown) {
             this.setVelocityX(this.moveSpeed);
         } else{
-            this.stop();
+            this.play("front");
         }
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
             this.play("left");

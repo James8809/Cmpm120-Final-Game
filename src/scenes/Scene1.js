@@ -11,6 +11,10 @@ class Scene1 extends Phaser.Scene{
         this.load.image('scene2_bg', './assets/ocean_scene2.png');
         this.load.image('floor', './assets/floor.png');
         this.load.image('obj1', './assets/book_bubble.png');
+        this.load.spritesheet('teddy', './assets/teddy_2.png',{
+            frameWidth:47,
+            frameHeight:108
+        });
         this.load.audio('bgm2', './assets/bgm2.mp3');
         this.load.spritesheet('player', './assets/player_spritesheet.png',{
             frameWidth:66.5,
@@ -26,12 +30,12 @@ class Scene1 extends Phaser.Scene{
         this.physics.world.setBounds(0, 0, w, h);
 
         // platforms
-        this.floor1 = 
+        //this.floor1 = this.add(w/2,h,"")
         this.door = this.addPlat(w/2,h,"obj1")
             .setOrigin(1,1).setScale(0.3);
 
         // player
-        this.player = new Teddy(this, w/2, 0,'player').setOrigin(0,1);
+        this.player = new Teddy(this, w/2, 0,'teddy').setOrigin(0,1);
         this.cameras.main.startFollow(this.player);
         this.player.setCollideWorldBounds(true);
         this.anims.create({
@@ -48,6 +52,10 @@ class Scene1 extends Phaser.Scene{
             frameRate:5,
             repeat: -1
         });
+        this.anims.create({
+            key:"front",
+            frames: this.anims.generateFrameNumbers('teddy')
+        })
 
         // controls
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

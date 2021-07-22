@@ -20,7 +20,7 @@ class Scene3 extends Phaser.Scene{
         this.door = this.addPlat(w/2,h,"obj3")
             .setOrigin(1,1).setScale(0.3);
 
-        this.player = new Teddy(this, w/2, 0,'player').setOrigin(0,1);
+        this.player = new Teddy(this, w/2, 0,'teddy').setOrigin(0,1);
         this.cameras.main.startFollow(this.player);
 
 
