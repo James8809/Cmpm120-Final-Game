@@ -1,8 +1,8 @@
 
 let config = {
     type: Phaser.CANVAS,
-    width: 2000,
-    height: 4000,
+    width: 800,
+    height: 600,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
@@ -16,7 +16,7 @@ let config = {
 }
 
 let game = new Phaser.Game(config);
-
+console.log("new");
 let w = game.config.width;
 let h = game.config.height;
 let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT, keySPACE;
@@ -28,7 +28,4 @@ let count = 0;
 let musicConfig;
 let music;
 let player;
-let cursors;
-let leftDoor = false;
-let rightDoor = false;
 let musicOn = false;

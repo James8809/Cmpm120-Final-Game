@@ -112,6 +112,7 @@ class Scene0 extends Phaser.Scene{
     createWindow(){
       var gameHeight = this.getGameHeight();
       var gameWidth = this.getGameWidth();
+      this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
       var dimensions = this.calculateWindowDimensions(gameWidth, gameHeight);
       this.graphics = this.add.graphics();
       this.createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
