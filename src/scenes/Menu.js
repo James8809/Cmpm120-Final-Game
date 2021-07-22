@@ -7,18 +7,17 @@ class Menu extends Phaser.Scene{
 
     }
     preload() {
-        this.load.image('menu','./assets/memory_dive.png');
+        this.load.image('scene1_bg', './assets/memory_dive_remake.png');
     }
     create() {
+
+        this.add.image(0, 0, 'scene1_bg').setOrigin(0, 0);
         
-        this.add.image(0, 0, 'menu').setOrigin(0, 0);
-        
-        keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         
     }
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+        if (keyENTER.isDown) {
             this.scene.start('scene0');
         }
     }
