@@ -11,20 +11,15 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
         this.setVelocityX(0);
         if(keyLEFT.isDown) {
             this.setVelocityX(-this.moveSpeed);
+            this.anims.play("left", true);
         } else if(keyRIGHT.isDown) {
             this.setVelocityX(this.moveSpeed);
-        } else{
-            this.play("front");
+            this.anims.play("right", true);
+        } else {
+            this.anims.play("front", true);
+            this.anims.stop();
         }
-        if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
-            this.play("left");
-        }
-        if(keyRIGHT.isDown) {
-            this.setVelocityX(this.moveSpeed);
-        }
-        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)){
-            this.play("right");
-        }
+        
         if(Phaser.Input.Keyboard.JustDown(keySPACE) && this.jumping){
             this.setVelocityY(-600);
             this.jumping = false;
@@ -36,5 +31,10 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
         if(keyUP.isDown){
             this.setVelocityY(-600);
         }
+    }
+    pause(){
+        console.log("stop")
+        this.play("front");
+        this.stop();
     }
 }
