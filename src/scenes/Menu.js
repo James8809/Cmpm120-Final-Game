@@ -7,7 +7,7 @@ class Menu extends Phaser.Scene{
 
     }
     preload() {
-        this.load.image('scene1_bg1', './assets/title.png');
+        this.load.image('scene1_bg1', './assets/memory dive remake.png');
         this.load.image('scene1_bg11', './assets/kid_studying.png');
         this.load.image('scene2_bg22', './assets/kid_sleep.png');
         this.load.image('scene3_bg33', './assets/kid_end.png');

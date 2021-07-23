@@ -2,6 +2,7 @@ class Scene01 extends Phaser.Scene{
     constructor() {
         super("scene01");
     }
+
     
     init(opts) {
         // Check to see if any optional parameters were passed
@@ -118,7 +119,7 @@ class Scene01 extends Phaser.Scene{
         this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
         this._createCloseModalButton();
         this._createCloseModalButtonBorder();
-        this.setText("It looks like you are surrounded by memories of study. You should be careful of the memory bubbles. If you crash into these bubbles, your best friend may lose the path to retrieve his knowledge when he takes an exam. (Press F to continue) ");
+        this.setText("It looks like you should first search for memories of studying togather with your owner. (Press ENTER to continue and F to gather bubbles) ");
       }
       create() {
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -126,6 +127,7 @@ class Scene01 extends Phaser.Scene{
       update() {
         if (keyENTER.isDown) {
           this.scene.start("scene1");
+          this.sound.get('memory one').stop();
         }
       }
     }

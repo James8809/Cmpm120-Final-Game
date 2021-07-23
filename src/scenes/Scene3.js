@@ -9,6 +9,7 @@ class Scene3 extends Phaser.Scene{
     preload() {
         this.load.image('scene4_bg', './assets/ocean_scene4.png');
         this.load.image('obj3', './assets/hold_bubble.png');
+        this.load.audio('bgm3', './assets/bgm3.mp3');
     }
     create() {
         // background
@@ -104,7 +105,7 @@ class Scene3 extends Phaser.Scene{
         this.physics.add.overlap(this.player,this.enemyGroup,this.crash,null,this);
         // music
         if(!musicOn) {
-            music = this.sound.add('bgm2');
+            music = this.sound.play('bgm3');
             music.setLoop(true);
             //music.play();
             musicOn = true;
@@ -116,11 +117,12 @@ class Scene3 extends Phaser.Scene{
         if(!this.gameOver) {
             this.player.update();
             if(this.count == 1) {
-                this.scene.start("menuScene");
+                this.scene.start("scene04");
             }
         }
         if(this.gameOver) {
             this.scene.start("scene3");
+            this.sound.get('bgm3').stop();
         }
     }
     addPlat(width, height, pic, num) {
