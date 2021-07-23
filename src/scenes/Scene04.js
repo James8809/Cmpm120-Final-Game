@@ -123,7 +123,7 @@ class Scene04 extends Phaser.Scene{
       this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this._createCloseModalButton();
       this._createCloseModalButtonBorder();
-        this.setText(" We are almost there. you will notice that fantastic pink color change in background. Inside that special water barrier which is the sign of the secret garden, you should collect precious memories bubbles (Press ENTER to continue and F to collect) ");
+        this.setText(" Congratulations! You made it! (Press ENTER to continue) ");
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
       }
