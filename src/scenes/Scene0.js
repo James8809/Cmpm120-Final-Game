@@ -26,14 +26,8 @@ class Scene0 extends Phaser.Scene{
         this.dialog;
         this.graphics;
         this.closeBtn;
-        // Create the dialog window
-        this.createWindow();
     }
     preload() {
-      this.load.audio('memory one','./assets/memoryMusic1.mp3');
-      this.load.audio('memory two','./assets/memoryMusic2.mp3');
-      this.load.audio('memory three','./assets/memoryMusic3.mp3');
-      this.load.audio('memory three','./assets/memoryMusic4.mp3');
     }
     getGameWidth() {
       return 800;
@@ -118,49 +112,85 @@ class Scene0 extends Phaser.Scene{
     createWindow(){
       var gameHeight = this.getGameHeight();
       var gameWidth = this.getGameWidth();
+
       var dimensions = this.calculateWindowDimensions(gameWidth, gameHeight);
       this.graphics = this.add.graphics();
       this.createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this._createCloseModalButton();
       this._createCloseModalButtonBorder();
+    }
+    create() {
       if (game.settings.sceneControl == 1) {
+        this.createWindow();
+        //music.stop();
+        music = this.sound.removeByKey('bgm3');
+        music = this.sound.add('bgm1');
+        music.setLoop(true);
+        music.play();
+        console.log("new2");
         this.setText("An old toy is forgotten by his owner for many years. Someday, he got a spell to go into his owner’s head.  Now, you can try to restore your relationship with your childhood best friend (your owner).  To achieve this goal, you need to collect fragile memory bubbles which are now lost in the sea of memory in the owner 's minds and put them back in the secret garden. During this process, try to avoid other toy's memory. (Press enter to start the game!)");
       }
       if (game.settings.sceneControl == 2) {
+        this.createWindow();
         this.setText("It looks like you should first search for memories of studying togather with your owner. (Press ENTER to continue and F to gather bubbles) ");
       }
-      if (game.settings.sceneControl == 3) {
-        this.setText(" In this area, it looks like you should search for your owner’s memory of everday life.(Press ENTER to continue and F to collect bubbles) ");
+      if (game.settings.sceneControl == 3) { 
+        this.add.sprite(0, 0, 'instruction').setOrigin(0,0);
       }
       if (game.settings.sceneControl == 4) {
+        music.stop();
+        music = this.sound.removeByKey('bgm2');
+        music = this.sound.add('bgm3');
+        music.setLoop(true);
+        music.play();
+        this.createWindow();
         this.setText(" We are almost there. you will notice that fantastic pink color change in background. Inside that special water barrier which is the sign of the secret garden, you should collect precious memories bubbles (Press ENTER to continue and F to collect) ");
       }
       if (game.settings.sceneControl == 5) {
+        this.createWindow();
+        this.setText(" We are almost there. you will notice that fantastic pink color change in background. Inside that special water barrier which is the sign of the secret garden, you should collect precious memories bubbles (Press ENTER to continue and F to collect) ");
+      }
+      if (game.settings.sceneControl == 6) {
+        this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
+        this.createWindow();
         this.setText(" Congratulations! You made it! (Press ENTER to continue) ");
       }
-    }
-    create() {
       keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     }
     update() {
 
       if (keyENTER.isDown) {
         game.settings.sceneControl++;
-        if(game.settings.sceneControl == 2){
+        if(game.settings.sceneControl == 2 || game.settings.sceneControl == 3){
           this.scene.start('scene0');
         }
-        if(game.settings.sceneControl == 3){
+        if(game.settings.sceneControl == 4){
+          /*
+          music.stop();
+          music = this.sound.removeByKey('memory_one');
+          music = this.sound.add('bgm1');
+          music.setLoop(true);
+          music.play();
+          console.log("here");
+          */
           this.scene.start('scene1');
         }
-        if(game.settings.sceneControl == 4){
+        if(game.settings.sceneControl == 5){
+          music.stop();
+          music = this.sound.removeByKey('bgm1');
+          music = this.sound.add('bgm2');
+          music.setLoop(true);
+          music.play();
           this.scene.start('scene2');
         }
-        if(game.settings.sceneControl == 5){
+        if(game.settings.sceneControl == 6){
+          music.stop();
+          music = this.sound.removeByKey('bgm1');
+          music = this.sound.add('bgm2');
+          music.setLoop(true);
+          music.play();
           this.scene.start('scene3');
-        }
-        if(game.settings.sceneControl == 5){
-          this.scene.start('menuScene');
         }
       }
     }
