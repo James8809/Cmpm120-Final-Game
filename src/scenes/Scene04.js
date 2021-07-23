@@ -1,6 +1,6 @@
-class Scene03 extends Phaser.Scene{
+class Scene04 extends Phaser.Scene{
     constructor() {
-        super("scene03");
+        super("scene04");
     }
     
     init(opts) {
@@ -30,7 +30,8 @@ class Scene03 extends Phaser.Scene{
       this.createWindow();
     }
     preload() {
-      this.load.audio('memory three','./assets/memory3.mp3');
+      this.load.audio('memory four','./assets/memory4.mp3');
+      this.load.iamge('child end','./assets/kind_end.png');
     }
     getGameWidth() {
       return w;
@@ -122,18 +123,18 @@ class Scene03 extends Phaser.Scene{
       this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this._createCloseModalButton();
       this._createCloseModalButtonBorder();
-        this.setText(" We are almost there. you will notice that fantastic pink color change in background. Inside that special water barrier which is the sign of the secret garden, you should collect precious memories bubbles (Press ENTER to continue and F to collect) ");
+        this.setText(" Congratulations! You made it! (Press ENTER to continue) ");
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-        this.add.sprite(0, 0, 'scene3_bg22').setOrigin(0,0);
+        this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
       }
       create() {
-        this.audio.play('memory three');
+        this.audio.play('memory four');
       }
       update() {
         if (keyENTER.isDown) {
           console.log("hello");
-          this.scene.start('scene3');
-          this.sound.get('memory3').stop();
+          this.scene.start('menuScene');
+          this.sound.get('memory4').stop();
         }
       }
     }

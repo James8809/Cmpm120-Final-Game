@@ -2,6 +2,9 @@ class Scene02 extends Phaser.Scene{
     constructor() {
         super("scene02");
     }
+    prelaod() {
+      this.load.audio('memory two','./assets/memory two.mp3');
+    }
     
     init(opts) {
         // Check to see if any optional parameters were passed
@@ -120,12 +123,17 @@ class Scene02 extends Phaser.Scene{
         this._createCloseModalButton();
         this._createCloseModalButtonBorder();
         this.add.sprite();
-        this.setText(" In this area, it looks like you are surrounded by memories of your owner’s everyday life . Like before, try to avoid the memory bubbles or your best friend may not remember the taste of his favorite homemaking food. (Press F to continue) ");
+        this.setText(" In this area, it looks like you should search for your owner’s memory of everday life.(Press ENTER to continue and F to collect bubbles) ");
+        this.add.sprite(0, 0, 'scene3_bg11').setOrigin(0,0);
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+      }
+      create() {
+        this.audio.play('memory two');
       }
       update() {
         if (keyENTER.isDown) {
           console.log("hello");
+          this.sound.get('memory one').stop();
           this.scene.start('scene2');
         }
       }

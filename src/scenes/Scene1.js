@@ -17,7 +17,7 @@ class Scene1 extends Phaser.Scene{
             frameWidth:64,
             frameHeight:113
         });
-        this.load.audio('bgm2', './assets/bgm2.mp3');
+        this.load.audio('bgm1', './assets/bgm1.mp3');
         this.load.spritesheet('player', './assets/player_spritesheet.png',{
             frameWidth:66.5,
             frameHeight:113
@@ -117,8 +117,7 @@ class Scene1 extends Phaser.Scene{
         this.physics.add.overlap(this.player,this.enemyGroup,this.crash,null,this);
         // music
         if(!musicOn) {
-            music = this.sound.add('bgm2');
-            music.setLoop(true);
+            music = this.sound.play('bgm1');
             //music.play();
             musicOn = true;
             console.log("new7");
@@ -130,6 +129,7 @@ class Scene1 extends Phaser.Scene{
             this.player.update();
             if(this.count == 3) {
                 this.scene.start("scene02");
+                this.sound.get('bgm1').stop();
             }
         }
         if(this.gameOver) {

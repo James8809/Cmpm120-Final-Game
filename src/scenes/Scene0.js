@@ -29,6 +29,9 @@ class Scene0 extends Phaser.Scene{
         // Create the dialog window
         this.createWindow();
     }
+    preload() {
+      this.load.audio('memory one','./assets/memory music1.mp3');
+    }
     getGameWidth() {
       return w;
     }
@@ -112,19 +115,20 @@ class Scene0 extends Phaser.Scene{
     createWindow(){
       var gameHeight = this.getGameHeight();
       var gameWidth = this.getGameWidth();
-      this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
       var dimensions = this.calculateWindowDimensions(gameWidth, gameHeight);
       this.graphics = this.add.graphics();
       this.createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this._createCloseModalButton();
       this._createCloseModalButtonBorder();
-      this.setText("An old toy is forgotten by his owner for many years. Someday, he got a spell to go into his owner’s head.  Now, you can try to restore your relationship with your childhood best friend (your owner).  To achieve this goal, you need to collect fragile memory bubbles which are now lost in the sea of memory in the owner 's minds and put them back in the secret garden. During this process, try to avoid other memory bubbles.");
+      this.setText("An old toy is forgotten by his owner for many years. Someday, he got a spell to go into his owner’s head.  Now, you can try to restore your relationship with your childhood best friend (your owner).  To achieve this goal, you need to collect fragile memory bubbles which are now lost in the sea of memory in the owner 's minds and put them back in the secret garden. During this process, try to avoid other toy's memory. (Press enter to start the game!)");
     }
     create() {
       keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+      this.sound.play('memory one');
     }
     update() {
+
       if (keyENTER.isDown) {
         this.scene.start('scene01');
       }
