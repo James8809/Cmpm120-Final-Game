@@ -132,8 +132,7 @@ class Scene04 extends Phaser.Scene{
       }
       update() {
         if (keyENTER.isDown) {
-          console.log("hello");
-          this.scene.start('menuScene');
+          this.scene.start('credit');
           this.sound.get('memory4').stop();
         }
       }
