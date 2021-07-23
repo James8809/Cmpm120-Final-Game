@@ -12,11 +12,11 @@ let config = {
             gravity: { y: 1000}
         }
     },
-    scene: [Menu, Scene0, Scene01, Scene1, Scene02, Scene2, Scene03, Scene3, Scene04]
+    scene: [Menu, Scene0, Scene1, Scene2, Scene3]
 }
 
 let game = new Phaser.Game(config);
-console.log("new");
+console.log("new2");
 let w = game.config.width;
 let h = game.config.height;
 let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT, keySPACE;

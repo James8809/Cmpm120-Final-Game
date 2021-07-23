@@ -116,9 +116,8 @@ class Scene2 extends Phaser.Scene{
     update() {
         if(!this.gameOver) {
             this.player.update();
-            if(this.count == 3) {
-                this.scene.start("scene03");
-                this.sound.get('bgm2').stop();
+            if(this.count == 1) {
+                this.scene.start("scene0");
             }
         }
         if(this.gameOver) {

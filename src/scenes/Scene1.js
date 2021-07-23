@@ -117,7 +117,7 @@ class Scene1 extends Phaser.Scene{
         this.physics.add.overlap(this.player,this.enemyGroup,this.crash,null,this);
         // music
         if(!musicOn) {
-            music = this.sound.play('bgm1');
+            //music = this.sound.play('bgm1');
             //music.play();
             musicOn = true;
             console.log("new7");
@@ -127,9 +127,8 @@ class Scene1 extends Phaser.Scene{
     update() {
         if(!this.gameOver) {
             this.player.update();
-            if(this.count == 3) {
-                this.scene.start("scene02");
-                this.sound.get('bgm1').stop();
+            if(this.count == 1) {
+                this.scene.start("scene0");
             }
         }
         if(this.gameOver) {

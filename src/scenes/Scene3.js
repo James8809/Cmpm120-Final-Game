@@ -117,12 +117,11 @@ class Scene3 extends Phaser.Scene{
         if(!this.gameOver) {
             this.player.update();
             if(this.count == 1) {
-                this.scene.start("scene04");
+                this.scene.start("scene0");
             }
         }
         if(this.gameOver) {
             this.scene.start("scene3");
-            this.sound.get('bgm3').stop();
         }
     }
     addPlat(width, height, pic, num) {
