@@ -28,7 +28,7 @@ class Scene2 extends Phaser.Scene{
         // platforms and enemies
         this.floor0 = this.addPlat(0,h, "ground",0).setOrigin(0,1);
         this.floorA = this.addPlat(w/6,150,"plat",0).setOrigin(0.5, 0).setScale(2.5);
-        this.floorC = this.addPlat(1400,400,"plat",0).setOrigin(0.5, 0).setScale(2.5);
+        this.floorC = this.addPlat(w/2,400,"plat",0).setOrigin(0.5, 0).setScale(2.5);
         this.floor2 = this.addPlat(200,600,"plat",1).setOrigin(0.5, 0).setScale(2.5);
         this.floor3 = this.addPlat(1735,1000,"plat",1).setOrigin(0.5, 0).setScale(2.5);
         this.floor4 = this.addPlat(1900,1350,"plat",1).setOrigin(0.5, 0).setScale(2.5);
