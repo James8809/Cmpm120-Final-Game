@@ -23,6 +23,7 @@ class Scene1 extends Phaser.Scene{
         this.load.audio('pick', './assets/pickupitem.wav');
         this.load.audio('step', './assets/step.wav');
         this.load.audio('hurt', './assets/hurt.ogg');
+        this.load.audio('bounce', './assets/bounce.mp3');
     }
     create() {
         // background
@@ -122,8 +123,8 @@ class Scene1 extends Phaser.Scene{
         
         pick = this.sound.add('pick'); 
         step = this.sound.add('step'); 
-        //step.setLoop(true);
-        this.hurt = this.sound.add('hurt'); 
+        hurt = this.sound.add('hurt'); 
+        bounce = this.sound.add('bounce'); 
         
         this.player.on('animationrepeat', function () {
             if(this.player.anims.currentAnim.key === 'left' || this.player.anims.currentAnim.key === 'right'
@@ -163,7 +164,7 @@ class Scene1 extends Phaser.Scene{
     }
     open(player, door) {
         if(keyF.isDown) {
-            this.pick.play();
+            pick.play();
             door.destroy();
             this.count++;
         }
@@ -171,5 +172,6 @@ class Scene1 extends Phaser.Scene{
     crash(){
         this.gameOver = true;
         this.enemyGroup.runChildUpdate = false;
+        hurt.play();
     }
 }

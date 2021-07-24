@@ -13,23 +13,22 @@ class Teddy extends Phaser.Physics.Arcade.Sprite {
         if(keyLEFT.isDown) {
             this.setVelocityX(-this.moveSpeed);
             this.anims.play("left", true);
-            step.play();
         } else if(keyRIGHT.isDown) {
             this.setVelocityX(this.moveSpeed);
             this.anims.play("right", true);
-            step.play();
         } else {
             this.anims.play("front", true);
             this.anims.stop();
-            step.stop();
         }
         
         if(Phaser.Input.Keyboard.JustDown(keySPACE) && this.jumping){
             this.setVelocityY(-600);
+            bounce.play();
             this.jumping = false;
         }
         if(keySPACE.isDown && this.body.touching.down){
             this.setVelocityY(-600);
+            bounce.play();
             this.jumping = true;
         }
         /*

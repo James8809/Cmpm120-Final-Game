@@ -26,6 +26,6 @@ let borderUISize = w / 10;
 let borderPadding = borderUISize / 3;
 let count = 0;
 let musicConfig;
-let music, step, pick, hurt;
+let music, step, pick, hurt, bounce;
 let player;
 let musicOn = false;

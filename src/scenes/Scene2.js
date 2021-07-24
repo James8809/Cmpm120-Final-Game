@@ -100,6 +100,12 @@ class Scene2 extends Phaser.Scene{
         this.physics.add.collider(this.player, this.floorGroup);
         this.physics.add.overlap(this.player,this.enemyGroup,this.crash,null,this);
         // music
+        this.player.on('animationrepeat', function () {
+            if(this.player.anims.currentAnim.key === 'left' || this.player.anims.currentAnim.key === 'right'
+               & this.player.body.touching.down) {
+              this.sound.play('step');
+            }
+        }.bind(this));
         
     }
     update() {
@@ -132,7 +138,7 @@ class Scene2 extends Phaser.Scene{
     }
     open(player, door) {
         if(keyF.isDown) {
-            this.pick.play();
+            pick.play();
             door.destroy();
             this.count++;
         }
@@ -140,5 +146,6 @@ class Scene2 extends Phaser.Scene{
     crash(){
         this.gameOver = true;
         this.enemyGroup.runChildUpdate = false;
+        hurt.play();
     }
 }
