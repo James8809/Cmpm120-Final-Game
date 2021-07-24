@@ -15,7 +15,7 @@ class Scene0 extends Phaser.Scene{
         this.windowHeight = opts.windowHeight || 150;
         this.padding = opts.padding || 32;
         this.closeBtnColor = opts.closeBtnColor || 'darkgoldenrod';
-        this.dialogSpeed = opts.dialogSpeed || 3;
+        this.dialogSpeed = opts.dialogSpeed || 100;
         // used for animating the text
         this.eventCounter = 0;
         // if the dialog window is shown
@@ -26,14 +26,8 @@ class Scene0 extends Phaser.Scene{
         this.dialog;
         this.graphics;
         this.closeBtn;
-        // Create the dialog window
-        this.createWindow();
     }
     preload() {
-      this.load.audio('memory one','./assets/memoryMusic1.mp3');
-      this.load.audio('memory two','./assets/memoryMusic2.mp3');
-      this.load.audio('memory three','./assets/memoryMusic3.mp3');
-      this.load.audio('memory three','./assets/memoryMusic4.mp3');
     }
     getGameWidth() {
       return 800;
@@ -97,8 +91,28 @@ class Scene0 extends Phaser.Scene{
       if (this.graphics) this.graphics.visible = this.visible;
       if (this.closeBtn) this.closeBtn.visible = this.visible;
     }
-    setText(text) {
-      this._setText(text);
+    setText (text, animate) {
+      // Reset the dialog
+      this.eventCounter = 0;
+      this.dialog = text.split('');
+      if (this.timedEvent) this.timedEvent.remove();
+      var tempText = animate ? '' : text;
+      this._setText(tempText);
+      if (animate) {
+        this.timedEvent = this.time.addEvent({
+          delay: 150 - (this.dialogSpeed * 30),
+          callback: this._animateText,
+          callbackScope: this,
+          loop: true
+        });
+      }
+    }
+    _animateText() {
+      this.eventCounter++;
+      this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
+      if (this.eventCounter === this.dialog.length) {
+        this.timedEvent.remove();
+      }
     }
     // Calcuate the position of the text in the dialog window
     _setText(text) {
@@ -118,49 +132,99 @@ class Scene0 extends Phaser.Scene{
     createWindow(){
       var gameHeight = this.getGameHeight();
       var gameWidth = this.getGameWidth();
+
       var dimensions = this.calculateWindowDimensions(gameWidth, gameHeight);
       this.graphics = this.add.graphics();
       this.createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this.createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
       this._createCloseModalButton();
       this._createCloseModalButtonBorder();
-      if (game.settings.sceneControl == 1) {
-        this.setText("An old toy is forgotten by his owner for many years. Someday, he got a spell to go into his owner’s head.  Now, you can try to restore your relationship with your childhood best friend (your owner).  To achieve this goal, you need to collect fragile memory bubbles which are now lost in the sea of memory in the owner 's minds and put them back in the secret garden. During this process, try to avoid other toy's memory. (Press enter to start the game!)");
-      }
-      if (game.settings.sceneControl == 2) {
-        this.setText("It looks like you should first search for memories of studying togather with your owner. (Press ENTER to continue and F to gather bubbles) ");
-      }
-      if (game.settings.sceneControl == 3) {
-        this.setText(" In this area, it looks like you should search for your owner’s memory of everday life.(Press ENTER to continue and F to collect bubbles) ");
-      }
-      if (game.settings.sceneControl == 4) {
-        this.setText(" We are almost there. you will notice that fantastic pink color change in background. Inside that special water barrier which is the sign of the secret garden, you should collect precious memories bubbles (Press ENTER to continue and F to collect) ");
-      }
-      if (game.settings.sceneControl == 5) {
-        this.setText(" Congratulations! You made it! (Press ENTER to continue) ");
-      }
     }
     create() {
+      if (game.settings.sceneControl == 1) {
+        this.createWindow();
+        //music.stop();
+        music = this.sound.removeByKey('bgm3');
+        music = this.sound.add('bgm1');
+        music.setLoop(true);
+        music.play();
+        console.log("new3");
+        this.setText("Once there was a teddy bear who have accompanied with his owner since he was born. They had such great times together and the boy never forget his teddy bear. However, one day a tragic happened. The boy got in to a car crash and his brain was serverly injured leading to his memory loss including the memories with the teddy. The teddy was then forgotten by everone and was left inside a toy box waiting for his owner to pick him up once again.", true);
+      }
+      if (game.settings.sceneControl == 2) {
+        this.createWindow();
+        this.setText("He waited and waited. So long that he lost count of the time and was about to give up. Suddenly, at the very moment, A light appear in front of the teddy bear. As the light faded, he open his eyes and couldn't believe what he saw. Teddy: \" What happened? Where am I now? Wait... Im able to move myself! Ha! Ha! But... what is this place. It's so deep and there's someone down there too! But... they don't look so friendly. Better not approach them then. Is that a bubble over there? I don't know why but something tells me I should go and collect them.\"", true);
+      }
+      if (game.settings.sceneControl == 3) { 
+        this.add.sprite(0, 0, 'instruction').setOrigin(0,0);
+      }
+      if (game.settings.sceneControl == 4) {
+        music.stop();
+        music = this.sound.removeByKey('bgm2');
+        music = this.sound.add('bgm3');
+        music.setLoop(true);
+        music.play();
+        this.add.sprite(0, 0, 'scene1_bg11').setOrigin(0,0);
+        this.createWindow();
+        this.setText("Teddy: \"Wait... I remember this! This is when he used to study and he always have me beside him! Oh man, those were such good times! Does that mean those bubbles were actually pieces of memory? Maybe if I can collect more, I will be able to rebuild more memory with him and then maybe he will remember me! Yeh, lets do it then, I mean.... what else can I do now right?\"", true);
+      }
+      if (game.settings.sceneControl == 5) {
+        this.add.sprite(0, 0, 'scene2_bg22').setOrigin(0,0);
+        music.stop();
+        music = this.sound.removeByKey('bgm2');
+        music = this.sound.add('bgm3');
+        music.setLoop(true);
+        music.play();
+        this.createWindow();
+        this.setText("Teddy: \"Oh now...this....this goes way back... He was so little! Even I barely remember this anymore! Man, he used to hug me so tight when there's a thunder storm outside to a point I cant even breathe! Haha just kidding, but I do miss his hugs.... No time to lose then! I feel like I am very close to reaching the end and god knows what will happen afterwards.\"", true);
+      }
+      if (game.settings.sceneControl == 6) {
+        this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
+        music.stop();
+        music = this.sound.removeByKey('bgm2');
+        music = this.sound.add('memory_one');
+        music.setLoop(true);
+        music.play();
+        this.createWindow();
+        this.setText("With his tramendous effort and willness, he was able to collect all of the memory fragments.Thus the memories were rebuilt and so were his owner's memories. In the end, the owner recovers from his memory loss and return to his room from the hospital as soon as possible. He reached out to a dusty box and inside there was something he so preciously loved and yet forgotten. He hug the teddy with all his strength and that night he never released the hug. The next morning they boy brought the teddy to their favorite place and just sit along each other.\"",true);
+      }
       keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     }
     update() {
 
       if (keyENTER.isDown) {
         game.settings.sceneControl++;
-        if(game.settings.sceneControl == 2){
+        if(game.settings.sceneControl == 2 || game.settings.sceneControl == 3){
           this.scene.start('scene0');
         }
-        if(game.settings.sceneControl == 3){
+        if(game.settings.sceneControl == 4){
+          /*
+          music.stop();
+          music = this.sound.removeByKey('memory_one');
+          music = this.sound.add('bgm1');
+          music.setLoop(true);
+          music.play();
+          console.log("here");
+          */
           this.scene.start('scene1');
         }
-        if(game.settings.sceneControl == 4){
+        if(game.settings.sceneControl == 5){
+          music.stop();
+          music = this.sound.removeByKey('bgm3');
+          music = this.sound.add('bgm2');
+          music.setLoop(true);
+          music.play();
           this.scene.start('scene2');
         }
-        if(game.settings.sceneControl == 5){
+        if(game.settings.sceneControl == 6){
+          music.stop();
+          music = this.sound.removeByKey('bgm3');
+          music = this.sound.add('bgm2');
+          music.setLoop(true);
+          music.play();
           this.scene.start('scene3');
-        }
-        if(game.settings.sceneControl == 5){
-          this.scene.start('menuScene');
+        }if(game.settings.sceneControl == 7){
+          this.scene.start('creditScene');
         }
       }
     }

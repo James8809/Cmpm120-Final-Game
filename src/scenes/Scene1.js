@@ -8,20 +8,22 @@ class Scene1 extends Phaser.Scene{
     }
     preload() {
         this.load.image('scene2_bg', './assets/ocean_scene2.png');
-        this.load.image('floor', './assets/floor.png');
         this.load.image('obj1', './assets/book_bubble.png');
         this.load.image('plat', './assets/platform.png');
         this.load.image('ground', './assets/ground.png');
         this.load.image('enemy', './assets/enemy.png');
-        this.load.spritesheet('teddy', './assets/teddy2.png',{
+        this.load.spritesheet('teddy', './assets/teddy.png',{
             frameWidth:64,
             frameHeight:113
         });
-        this.load.audio('bgm1', './assets/bgm1.mp3');
         this.load.spritesheet('player', './assets/player_spritesheet.png',{
             frameWidth:66.5,
             frameHeight:113
         });
+        this.load.audio('pick', './assets/pickupitem.wav');
+        this.load.audio('step', './assets/step.wav');
+        this.load.audio('hurt', './assets/hurt.ogg');
+        this.load.audio('bounce', './assets/bounce.mp3');
     }
     create() {
         // background
@@ -40,7 +42,7 @@ class Scene1 extends Phaser.Scene{
 
         // platforms and enemies
         this.floor0 = this.addPlat(0,h, "ground",0).setOrigin(0,1);
-        this.floor01 = this.addPlat(w/2,h, "ground",0).setOrigin(0,1);
+        console.log("new lah");
         this.floor1 = this.addPlat(w/2,200,"plat",0).setOrigin(0.5, 0).setScale(2.5);
         this.floor2 = this.addPlat(200,600,"plat",1).setOrigin(0.5, 0).setScale(2.5);
         this.floor3 = this.addPlat(1735,1000,"plat",1).setOrigin(0.5, 0).setScale(2.5);
@@ -101,6 +103,7 @@ class Scene1 extends Phaser.Scene{
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
         //minor settings
         this.gameOver = false;
@@ -115,18 +118,28 @@ class Scene1 extends Phaser.Scene{
         this.physics.add.overlap(this.player,this.door3,this.open,null,this);
         this.physics.add.collider(this.player, this.floorGroup);
         this.physics.add.overlap(this.player,this.enemyGroup,this.crash,null,this);
-        // music
-        if(!musicOn) {
-            //music = this.sound.play('bgm1');
-            //music.play();
-            musicOn = true;
-            console.log("new7");
-        }
+
+        // sound
+        
+        pick = this.sound.add('pick'); 
+        step = this.sound.add('step'); 
+        hurt = this.sound.add('hurt'); 
+        bounce = this.sound.add('bounce'); 
+        
+        this.player.on('animationrepeat', function () {
+            if(this.player.anims.currentAnim.key === 'left' || this.player.anims.currentAnim.key === 'right'
+               & this.player.body.touching.down) {
+              this.sound.play('step');
+            }
+        }.bind(this));
 
     }
     update() {
         if(!this.gameOver) {
             this.player.update();
+            if (keyP.isDown) {
+                this.scene.start('scene0');
+            }
             if(this.count == 1) {
                 this.scene.start("scene0");
             }
@@ -151,6 +164,7 @@ class Scene1 extends Phaser.Scene{
     }
     open(player, door) {
         if(keyF.isDown) {
+            pick.play();
             door.destroy();
             this.count++;
         }
@@ -158,5 +172,6 @@ class Scene1 extends Phaser.Scene{
     crash(){
         this.gameOver = true;
         this.enemyGroup.runChildUpdate = false;
+        hurt.play();
     }
 }

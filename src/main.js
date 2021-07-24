@@ -12,20 +12,20 @@ let config = {
             gravity: { y: 1000}
         }
     },
-    scene: [Menu, Scene0, Scene1, Scene2, Scene3]
+    scene: [Menu, Scene0, Scene1, Scene2, Scene3, Credit]
+    // Menu, Scene0, Scene1, Scene2, 
 }
 
 let game = new Phaser.Game(config);
-console.log("new2");
 let w = game.config.width;
 let h = game.config.height;
-let keyUP, keyDOWN, keyH, keyESC, keyENTER, keyF, keyLEFT, keyRIGHT, keySPACE;
+let keyUP, keyDOWN, keyENTER, keyF, keyLEFT, keyRIGHT, keySPACE, keyP;
 let wDivide = w/7;
 let hDivide = h/5;
 let borderUISize = w / 10;
 let borderPadding = borderUISize / 3;
 let count = 0;
 let musicConfig;
-let music;
+let music, step, pick, hurt, bounce;
 let player;
 let musicOn = false;
