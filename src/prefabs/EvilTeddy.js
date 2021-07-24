@@ -16,10 +16,12 @@ class EvilTeddy extends Phaser.Physics.Arcade.Sprite {
     }
     update() {
         if(this.x < this.left) {
-            this.setVelocityX(this.moveSpeed); 
+            this.setVelocityX(this.moveSpeed);
+            this.anims.play("enemy_right", true);
         }
         if(this.x + this.width > this.right) {
             this.setVelocityX(-this.moveSpeed);
+            this.anims.play("enemy_left", true);
         }
         
     }

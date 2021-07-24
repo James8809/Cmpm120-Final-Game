@@ -123,9 +123,8 @@ class Scene3 extends Phaser.Scene{
             if (keyP.isDown) {
                 this.scene.start('scene0');
             }
-            if(this.count == 1) {
-                console.log("going final");
-                this.scene.start("creditScene");
+            if(this.count == 3) {
+                this.scene.start("scene0");
             }
         }
         if(this.gameOver) {
