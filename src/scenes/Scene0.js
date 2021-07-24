@@ -142,8 +142,9 @@ class Scene0 extends Phaser.Scene{
     }
     create() {
       if (game.settings.sceneControl == 1) {
+        this.add.sprite(0, 0, "scene1_bg22").setOrigin(0,0);
         this.createWindow();
-        //music.stop();
+        music.stop();
         music = this.sound.removeByKey('bgm3');
         music = this.sound.add('bgm1');
         music.setLoop(true);
