@@ -20,10 +20,14 @@ class Scene1 extends Phaser.Scene{
             frameWidth:66.5,
             frameHeight:113
         });
-        this.load.audio('pick', './assets/pickupitem.wav');
+        this.load.spritesheet('enemy_anim', './assets/enemy_spritesheet.png',{
+            frameWidth:83,
+            frameHeight:118
+        });
+        this.load.audio('pick', './assets/bubble.wav');
         this.load.audio('step', './assets/step.wav');
         this.load.audio('hurt', './assets/hurt.ogg');
-        this.load.audio('bounce', './assets/bounce.mp3');
+        this.load.audio('bounce', './assets/564918__sparkle1__jump-and-spark render 001.wav');
     }
     create() {
         // background
@@ -42,7 +46,6 @@ class Scene1 extends Phaser.Scene{
 
         // platforms and enemies
         this.floor0 = this.addPlat(0,h, "ground",0).setOrigin(0,1);
-        console.log("new lah");
         this.floor1 = this.addPlat(w/2,200,"plat",0).setOrigin(0.5, 0).setScale(2.5);
         this.floor2 = this.addPlat(200,600,"plat",1).setOrigin(0.5, 0).setScale(2.5);
         this.floor3 = this.addPlat(1735,1000,"plat",1).setOrigin(0.5, 0).setScale(2.5);
@@ -95,6 +98,20 @@ class Scene1 extends Phaser.Scene{
             frameRate:5,
             repeat: -1
         })
+        this.anims.create({
+            key:"enemy_left",
+            frames: this.anims.generateFrameNumbers('enemy_anim',
+                {frames: [2,3]}),
+            frameRate:5,
+            repeat: -1
+        })
+        this.anims.create({
+            key:"enemy_right",
+            frames: this.anims.generateFrameNumbers('enemy_anim',
+                {frames: [1,0]}),
+            frameRate:5,
+            repeat: -1
+        })
 
         // controls
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -129,7 +146,7 @@ class Scene1 extends Phaser.Scene{
         this.player.on('animationrepeat', function () {
             if(this.player.anims.currentAnim.key === 'left' || this.player.anims.currentAnim.key === 'right'
                & this.player.body.touching.down) {
-              this.sound.play('step');
+              this.sound.play('step', {volume: 0.5});
             }
         }.bind(this));
 
@@ -140,7 +157,7 @@ class Scene1 extends Phaser.Scene{
             if (keyP.isDown) {
                 this.scene.start('scene0');
             }
-            if(this.count == 1) {
+            if(this.count == 3) {
                 this.scene.start("scene0");
             }
         }

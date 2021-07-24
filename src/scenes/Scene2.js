@@ -103,7 +103,7 @@ class Scene2 extends Phaser.Scene{
         this.player.on('animationrepeat', function () {
             if(this.player.anims.currentAnim.key === 'left' || this.player.anims.currentAnim.key === 'right'
                & this.player.body.touching.down) {
-              this.sound.play('step');
+              this.sound.play('step', {volume: 0.5});
             }
         }.bind(this));
         
@@ -114,7 +114,7 @@ class Scene2 extends Phaser.Scene{
             if (keyP.isDown) {
                 this.scene.start('scene0');
             }
-            if(this.count == 1) {
+            if(this.count == 3) {
                 this.scene.start("scene0");
             }
         }

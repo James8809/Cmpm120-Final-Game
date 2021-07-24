@@ -146,13 +146,13 @@ class Scene0 extends Phaser.Scene{
         this.createWindow();
         music.stop();
         music = this.sound.removeByKey('bgm3');
-        music = this.sound.add('bgm1');
+        music = this.sound.add('bgm1', {volume: 0.1});
         music.setLoop(true);
         music.play();
-        console.log("new3");
         this.setText("Once there was a teddy bear who have accompanied with his owner since he was born. They had such great times together and the boy never forget his teddy bear. However, one day a tragic happened. The boy got in to a car crash and his brain was serverly injured leading to his memory loss including the memories with the teddy. The teddy was then forgotten by everone and was left inside a toy box waiting for his owner to pick him up once again.", true);
       }
       if (game.settings.sceneControl == 2) {
+        this.add.sprite(0, 0, 'scene1_bg33').setOrigin(0,0);
         this.createWindow();
         this.setText("He waited and waited. So long that he lost count of the time and was about to give up. Suddenly, at the very moment, A light appear in front of the teddy bear. As the light faded, he open his eyes and couldn't believe what he saw. Teddy: \" What happened? Where am I now? Wait... Im able to move myself! Ha! Ha! But... what is this place. It's so deep and there's someone down there too! But... they don't look so friendly. Better not approach them then. Is that a bubble over there? I don't know why but something tells me I should go and collect them.\"", true);
       }
@@ -162,7 +162,7 @@ class Scene0 extends Phaser.Scene{
       if (game.settings.sceneControl == 4) {
         music.stop();
         music = this.sound.removeByKey('bgm2');
-        music = this.sound.add('bgm3');
+        music = this.sound.add('bgm3', {volume: 0.1});
         music.setLoop(true);
         music.play();
         this.add.sprite(0, 0, 'scene1_bg11').setOrigin(0,0);
@@ -173,7 +173,7 @@ class Scene0 extends Phaser.Scene{
         this.add.sprite(0, 0, 'scene2_bg22').setOrigin(0,0);
         music.stop();
         music = this.sound.removeByKey('bgm2');
-        music = this.sound.add('bgm3');
+        music = this.sound.add('bgm3', {volume: 0.1});
         music.setLoop(true);
         music.play();
         this.createWindow();
@@ -183,7 +183,7 @@ class Scene0 extends Phaser.Scene{
         this.add.sprite(0, 0, 'scene3_bg33').setOrigin(0,0);
         music.stop();
         music = this.sound.removeByKey('bgm2');
-        music = this.sound.add('memory_one');
+        music = this.sound.add('memory_one', {volume: 0.1});
         music.setLoop(true);
         music.play();
         this.createWindow();
@@ -199,20 +199,12 @@ class Scene0 extends Phaser.Scene{
           this.scene.start('scene0');
         }
         if(game.settings.sceneControl == 4){
-          /*
-          music.stop();
-          music = this.sound.removeByKey('memory_one');
-          music = this.sound.add('bgm1');
-          music.setLoop(true);
-          music.play();
-          console.log("here");
-          */
           this.scene.start('scene1');
         }
         if(game.settings.sceneControl == 5){
           music.stop();
           music = this.sound.removeByKey('bgm3');
-          music = this.sound.add('bgm2');
+          music = this.sound.add('bgm2', {volume: 0.1});
           music.setLoop(true);
           music.play();
           this.scene.start('scene2');
@@ -220,7 +212,7 @@ class Scene0 extends Phaser.Scene{
         if(game.settings.sceneControl == 6){
           music.stop();
           music = this.sound.removeByKey('bgm3');
-          music = this.sound.add('bgm2');
+          music = this.sound.add('bgm2', {volume: 0.1});
           music.setLoop(true);
           music.play();
           this.scene.start('scene3');

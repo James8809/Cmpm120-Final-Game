@@ -16,7 +16,7 @@ class Credit extends Phaser.Scene{
         }
         music.stop();
         music = this.sound.removeByKey('bgm2');
-        music = this.sound.add('credit_bgm');
+        music = this.sound.add('credit_bgm', {volume: 0.1});
         music.setLoop(true);
         music.play();
         let space = 100;

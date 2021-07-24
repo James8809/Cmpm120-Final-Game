@@ -9,6 +9,7 @@ class Menu extends Phaser.Scene{
     preload() {
         this.load.image('scene1_bg1', './assets/memory dive remake.png');
         this.load.image('scene1_bg22', './assets/injured.png');
+        this.load.image('scene1_bg33', './assets/light.png');
         this.load.image('scene1_bg11', './assets/kid_studying.png');
         this.load.image('scene2_bg22', './assets/kid_sleep.png');
         this.load.image('scene3_bg33', './assets/kid_end.png');
@@ -21,7 +22,7 @@ class Menu extends Phaser.Scene{
     }
     create() {
         this.add.image(0, 0, 'scene1_bg1').setOrigin(0, 0);
-        music = this.sound.add('bgm3');
+        music = this.sound.add('bgm3', {volume: 0.1});
         music.setLoop(true);
         music.play();
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
